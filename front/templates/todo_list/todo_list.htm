@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Todo List</title>
+    </head>
+
+    <body>
+        <div style="height:15px; width:20%; background-color:gray; border-radius:30px">
+            <div id="progress" style="height:15px; width:0%;border-radius:30px; text-align:center; color: white"></div>
+        </div>
+        <ol style="list-style-type:none">
+        {% for todo in todos %}
+                <li>
+                    <input type="checkbox" class='task_check' onchange='handleChange(this)'id={{todo.id}} name="task" value={{todo.task}}>
+                    <label id=task{{todo.id}} for={{todo.id}}>{{todo.task}}</label><br>
+                </li>
+        {% else %}
+            <div>Pas de tâche</div>
+        {% endfor %}
+        </ol>
+        <form action={{url_for("add_task")}} method="POST">
+            <label>Ajouter une nouvelle tache à la liste</label>
+            <input type="textarea" name="task"/>
+            <input type="submit" value="Ajouter"/>
+        </form>
+        <script src={{url_for('static', filename='script.js')}}></script>
+    </body>
+
+</html>
