@@ -1,6 +1,6 @@
 console.log("Begin");
 
-const nb_tasks = document.getElementsByClassName("task_check").length
+const nb_tasks = document.getElementsByName("task").length
 const progress_bar = document.getElementById("progress")
 var nb_checked_task = 0
 
