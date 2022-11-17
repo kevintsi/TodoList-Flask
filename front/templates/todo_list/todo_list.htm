@@ -15,10 +15,10 @@
 
         <form action={{url_for("delete_task")}} method="POST">
             <ol style="list-style-type:none">
-            {% for todo in todos %}
+            {% for id, name in todos %}
                     <li>
-                        <input type="checkbox" onchange='handleChange(this)' id={{todo.id}} name="task" value={{todo.id}}>
-                        <label id=task{{todo.id}} for={{todo.id}}>{{todo.task}}</label><br>
+                        <input type="checkbox" onchange='handleChange(this)' id={{id}} name="task" value={{id}}>
+                        <label id=task{{id}} for={{id}}>{{name}}</label><br>
                     </li>
             {% else %}
                 <div>Pas de tâche</div>

@@ -1,33 +1,50 @@
 from flask import Flask, render_template, request, redirect, url_for
+import mariadb
 
 app = Flask(__name__)
 
-todos = [
-    {"id": "1", "task": "Task"},
-    {"id": "2", "task": "Task2"},
-    {"id": "3", "task": "Task3"},
-]
+conn = mariadb.connect(
+    host="localhost",
+    database="todo_list",
+    user="mariadb",
+    password="password"
+)
 
 
 @app.get("/")
 def index():
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM task")
+    todos = cur.fetchall()
     print(todos)
     return render_template("todo_list/todo_list.htm", todos=todos)
 
 
 @app.post("/add")
 def add_task():
-    global todos
     print(request.form["new_task"])
-    todos.append({"id": '4', "task": request.form["new_task"]})
+    cur = conn.cursor()
+    try:
+        cur.execute("INSERT INTO task (name) VALUES (?)",
+                    (request.form["new_task"],))
+        conn.commit()
+    except mariadb.Error as e:
+        print(f"Error: {e}")
+
     return redirect(url_for("index"))
 
 
 @app.post("/delete")
 def delete_task():
-    global todos
     ids = request.form.getlist("task")
     print(ids)
-    todos = list(filter(
-        lambda item: True if not item["id"] in ids else False, todos))
+    cur = conn.cursor()
+    for id in ids:
+        try:
+            cur.execute("DELETE FROM task WHERE id = ?",
+                        (id,))
+            conn.commit()
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+
     return redirect(url_for("index"))
