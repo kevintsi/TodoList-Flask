@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height:100%;background-color: #E08283;">
 
     <head>
         <meta charset="UTF-8">
@@ -8,32 +8,32 @@
         <title>Todo List</title>
     </head>
 
-    <body>
-        <div style="height:15px; width:20%; background-color:gray; border-radius:30px">
-            <div id="progress" style="height:15px; width:0%;border-radius:30px; text-align:center; color: white"></div>
+    <body style="height: 50%;display:flex; align-items:center; margin-top:10%; flex-direction:column">
+        <div style="border:1px solid black; padding:10%">
+            <h1>Liste des choses à faires</h1>
+            <div style="height:15px; background-color:#E5E5E5; border-radius:30px">
+                <div id="progress" style="height:15px; width:0%;border-radius:30px; text-align:center; color: white"></div>
+            </div>
+                <ol style="list-style-type:none">
+                {% for id, name in todos %}
+                        <li style="font-size: larger">
+                            <input type="checkbox" onchange='handleChange(this)' id={{id}} name="task" value={{id}}>
+                            <label id=task{{id}} for={{id}}>{{name}}</label><br>
+                        </li>
+                {% else %}
+                    <div>Pas de tâche</div>
+                {% endfor %}
+                </ol>
+            
+            <form action={{url_for("add_task")}} method="POST">
+                <div style="display:flex; flex-direction:column">
+                    <label style="font-size: larger; margin:10px">Ajouter une nouvelle tache à la liste</label>
+                    <input placeholder="Entrez une nouvelle tache" style="margin:10px" type="textarea" name="new_task"/>
+                    <input style="margin:10px" type="submit" value="Ajouter"/>
+                </div>
+            </form>
         </div>
-
-        <form action={{url_for("delete_task")}} method="POST">
-            <ol style="list-style-type:none">
-            {% for id, name in todos %}
-                    <li>
-                        <input type="checkbox" onchange='handleChange(this)' id={{id}} name="task" value={{id}}>
-                        <label id=task{{id}} for={{id}}>{{name}}</label><br>
-                    </li>
-            {% else %}
-                <div>Pas de tâche</div>
-            {% endfor %}
-            </ol>
-                <input type="submit" value="Archiver"/>
-        </form>
-
-        <form action={{url_for("add_task")}} method="POST">
-            <label>Ajouter une nouvelle tache à la liste</label>
-            <input type="textarea" name="new_task"/>
-            <input type="submit" value="Ajouter"/>
-        </form>
-
-        
+             
         <script src={{url_for('static', filename='script.js')}}></script>
     </body>
 

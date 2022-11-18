@@ -34,17 +34,17 @@ def add_task():
     return redirect(url_for("index"))
 
 
-@app.post("/delete")
-def delete_task():
-    ids = request.form.getlist("task")
-    print(ids)
-    cur = conn.cursor()
-    for id in ids:
-        try:
-            cur.execute("DELETE FROM task WHERE id = ?",
-                        (id,))
-            conn.commit()
-        except mariadb.Error as e:
-            print(f"Error: {e}")
+# @app.post("/delete")
+# def delete_task():
+#     ids = request.form.getlist("task")
+#     print(ids)
+#     cur = conn.cursor()
+#     for id in ids:
+#         try:
+#             cur.execute("DELETE FROM task WHERE id = ?",
+#                         (id,))
+#             conn.commit()
+#         except mariadb.Error as e:
+#             print(f"Error: {e}")
 
-    return redirect(url_for("index"))
+#     return redirect(url_for("index"))

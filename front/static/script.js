@@ -10,18 +10,20 @@ function handleChange(checkbox) {
         nb_checked_task++
         progress_bar.style.width = Math.round(calcul_pourcentage()) + "%"
         label.style.textDecoration = "line-through"
+        label.style.fontStyle = "italic"
     } else {
         nb_checked_task--
         progress_bar.style.width = Math.round(calcul_pourcentage()) + "%"
         label.style.textDecoration = "none"
+        label.style.fontStyle = "normal"
     }
 
 
     var new_width = parseInt(progress_bar.style.width.split("%")[0])
 
-    if (new_width >= 80) {
+    if (new_width >= 70) {
         progress_bar.style.backgroundColor = "green"
-    } else if (new_width > 50 && new_width < 80) {
+    } else if (new_width > 40 && new_width < 70) {
         progress_bar.style.backgroundColor = "orange"
     } else {
         progress_bar.style.backgroundColor = "red"
