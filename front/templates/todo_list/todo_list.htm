@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href={{url_for('static', filename='style.css')}} rel="stylesheet" type="text/css">
         <title>Todo List</title>
     </head>
 
@@ -24,14 +25,18 @@
                     <div>Pas de tâche</div>
                 {% endfor %}
                 </ol>
-            
-            <form action={{url_for("add_task")}} method="POST">
-                <div style="display:flex; flex-direction:column">
-                    <label style="font-size: larger; margin:10px">Ajouter une nouvelle tache à la liste</label>
-                    <input placeholder="Entrez une nouvelle tache" style="margin:10px" type="textarea" name="new_task"/>
-                    <input style="margin:10px" type="submit" value="Ajouter"/>
-                </div>
-            </form>
+            <div>
+                <button id="add-task-bt" style="padding: 10px;border-radius:10px" onclick="openAddTask()">Ajouter une tache</button>
+                <form action={{url_for("add_task")}} method="POST">
+                    <div id="new-task-container" style="display:flex; flex-direction:row; display:none">
+                        <textarea placeholder="Ajouter une tache" style="padding: 10px;border-radius:10px; width:100%; height:50px" name="new_task"></textarea>
+                        <div style="margin-top:10px">
+                            <button style="padding: 10px;border-radius:10px;width: 30%;background-color: slategrey; color:white" type="submit">Ajouter</button>
+                            <a class="cancel-link" onclick="closeAddTask()" style="padding: 10px;">Annuler</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
              
         <script src={{url_for('static', filename='script.js')}}></script>

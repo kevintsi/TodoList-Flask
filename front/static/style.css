@@ -1,0 +1,9 @@
+.cancel-link:hover {
+    background-color: aliceblue;
+    opacity: 50%;
+    cursor: pointer;
+}
+
+button:hover {
+    cursor: pointer
+}

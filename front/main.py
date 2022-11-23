@@ -22,6 +22,9 @@ def index():
 
 @app.post("/add")
 def add_task():
+    if request.form["new_task"] == "":
+        return redirect(url_for("index"))
+
     print(request.form["new_task"])
     cur = conn.cursor()
     try:

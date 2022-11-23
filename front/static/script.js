@@ -38,3 +38,20 @@ function handleChange(checkbox) {
 function calcul_pourcentage() {
     return nb_checked_task / nb_tasks * 100
 }
+
+
+function openAddTask() {
+    new_task_container = document.getElementById("new-task-container")
+    new_task_container.style.display = "block"
+
+    add_task_bt = document.getElementById("add-task-bt")
+    add_task_bt.style.display = "none"
+}
+
+function closeAddTask() {
+    new_task_container = document.getElementById("new-task-container")
+    new_task_container.style.display = "none"
+
+    add_task_bt = document.getElementById("add-task-bt")
+    add_task_bt.style.display = "block"
+}
